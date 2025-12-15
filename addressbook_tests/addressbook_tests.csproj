@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NUnitTestAdapter.2.3.0\build\NUnitTestAdapter.props" Condition="Exists('..\packages\NUnitTestAdapter.2.3.0\build\NUnitTestAdapter.props')" />
   <Import Project="..\packages\NUnit3TestAdapter.6.0.0\build\net462\NUnit3TestAdapter.props" Condition="Exists('..\packages\NUnit3TestAdapter.6.0.0\build\net462\NUnit3TestAdapter.props')" />
   <Import Project="..\packages\Microsoft.Testing.Extensions.Telemetry.2.0.2\build\netstandard2.0\Microsoft.Testing.Extensions.Telemetry.props" Condition="Exists('..\packages\Microsoft.Testing.Extensions.Telemetry.2.0.2\build\netstandard2.0\Microsoft.Testing.Extensions.Telemetry.props')" />
   <Import Project="..\packages\Microsoft.Testing.Platform.MSBuild.2.0.2\build\Microsoft.Testing.Platform.MSBuild.props" Condition="Exists('..\packages\Microsoft.Testing.Platform.MSBuild.2.0.2\build\Microsoft.Testing.Platform.MSBuild.props')" />
@@ -143,7 +144,7 @@
   <ItemGroup>
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTest2.cs" />
+    <Compile Include="GroupCreationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -166,6 +167,7 @@
     <Error Condition="!Exists('..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets'))" />
     <Error Condition="!Exists('..\packages\NUnit3TestAdapter.6.0.0\build\net462\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.6.0.0\build\net462\NUnit3TestAdapter.props'))" />
     <Error Condition="!Exists('..\packages\NUnit3TestAdapter.6.0.0\build\net462\NUnit3TestAdapter.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.6.0.0\build\net462\NUnit3TestAdapter.targets'))" />
+    <Error Condition="!Exists('..\packages\NUnitTestAdapter.2.3.0\build\NUnitTestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnitTestAdapter.2.3.0\build\NUnitTestAdapter.props'))" />
   </Target>
   <Import Project="..\packages\MSTest.TestAdapter.2.2.10\build\net46\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.2.2.10\build\net46\MSTest.TestAdapter.targets')" />
   <Import Project="..\packages\Selenium.WebDriver.4.39.0\build\Selenium.WebDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.4.39.0\build\Selenium.WebDriver.targets')" />

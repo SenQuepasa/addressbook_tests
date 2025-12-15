@@ -8,10 +8,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 
-namespace addressbook_tests
+namespace WebAddressbookTests
 {
     [TestFixture]
-    public class UntitledTestCase
+    public class GroupCreationTests
     {
         private IWebDriver driver;
         private StringBuilder verificationErrors;
@@ -41,7 +41,7 @@ namespace addressbook_tests
         }
 
         [Test]
-        public void TheUntitledTestCaseTest()
+        public void GroupCreationTest()
         {
             driver.Navigate().GoToUrl(baseURL);
             driver.FindElement(By.Name("user")).Clear();
