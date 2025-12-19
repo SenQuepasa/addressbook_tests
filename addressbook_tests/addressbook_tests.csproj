@@ -145,10 +145,12 @@
     <Compile Include="AccountData.cs" />
     <Compile Include="ContactData.cs" />
     <Compile Include="GroupData.cs" />
+    <Compile Include="TestBase.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GroupCreationTests.cs" />
     <Compile Include="ContactCreationTests.cs" />
+    <Compile Include="GroupDelete.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
