@@ -11,6 +11,7 @@ namespace WebAddressbookTests
 {
     public class ApplicationManager
     {
+
         protected IWebDriver driver;
         protected string baseURL;
 
@@ -26,6 +27,7 @@ namespace WebAddressbookTests
             navigator = new NavigationHelper(driver, baseURL);
             groupHelper = new GroupHelper(driver);
             contactHelper = new ContactHelper(driver);
+            this.driver = new FirefoxDriver();
 
         }
         public void Stop()

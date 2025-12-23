@@ -11,28 +11,23 @@ namespace WebAddressbookTests
 {
     public class GroupHelper : HelperBase
     {
-        public GroupHelper(IWebDriver driver)
-            : base(driver)
+        public GroupHelper(IWebDriver driver) : base(driver)
         {
+        }
 
-        }
-        public void SubmitGroupCreation()
+        public GroupHelper Create(GroupData group)
         {
-            driver.FindElement(By.Name("submit")).Click();
+            InitNewGroupCreation();
+            FillGroupForm(group);
+            SubmitGroupCreation();
+            return this;
         }
-        public void InitNewGroupCreation()
+        public GroupHelper InitNewGroupCreation()
         {
             driver.FindElement(By.Name("new")).Click();
+            return this;
         }
-        public void RemoveGroup()
-        {
-            driver.FindElement(By.Name("delete")).Click();
-        }
-        public void SelectGroup(int index)
-        {
-            driver.FindElement(By.XPath("//div[@id='content']/form/span[" + index + "]/input")).Click();
-        }
-        public void FillGroupForm(GroupData group)
+        public GroupHelper FillGroupForm(GroupData group)
         {
             driver.FindElement(By.Name("group_name")).Click();
             driver.FindElement(By.Name("group_name")).Clear();
@@ -43,6 +38,28 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("group_footer")).Click();
             driver.FindElement(By.Name("group_footer")).Clear();
             driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
+            return this;
+
         }
+        public GroupHelper SubmitGroupCreation()
+        {
+            driver.FindElement(By.Name("submit")).Click();
+            return this;
+
+        }
+
+        public GroupHelper RemoveGroup()
+        {
+            driver.FindElement(By.Name("delete")).Click();
+            return this;
+
+        }
+        public GroupHelper SelectGroup(int index)
+        {
+            driver.FindElement(By.XPath("//div[@id='content']/form/span[" + index + "]/input")).Click();
+            return this;
+
+        }
+
     }
 }

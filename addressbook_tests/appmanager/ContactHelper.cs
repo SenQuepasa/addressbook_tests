@@ -14,15 +14,18 @@ namespace WebAddressbookTests
         public ContactHelper(IWebDriver driver) : base(driver)
         {
         }
-        public void SubmitContactCreation()
+        public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[19]")).Click();
+            return this;
         }
-        public void AddContact()
+        public ContactHelper AddContact()
         {
             driver.FindElement(By.LinkText("add new")).Click();
+            return this;
+
         }
-        public void FillContactForm(ContactData contact)
+        public ContactHelper FillContactForm(ContactData contact)
         {
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).Clear();
@@ -74,6 +77,8 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("ayear")).Click();
             driver.FindElement(By.Name("ayear")).Clear();
             driver.FindElement(By.Name("ayear")).SendKeys("2010");
+            return this;
+
         }
     }
 }

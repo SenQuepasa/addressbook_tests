@@ -20,25 +20,33 @@ namespace WebAddressbookTests
         {
             this.baseURL = baseURL;
         }
-        public void OpenHomePage()
+        public NavigationHelper OpenHomePage()
         {
             driver.Navigate().GoToUrl(baseURL);
+            return this;
         }
-        public void ReturnToGroupsPage()
+        public NavigationHelper ReturnToGroupsPage()
         {
             driver.FindElement(By.LinkText("group page")).Click();
+            return this;
+
         }
-        public void GoToGroupPage()
+        public NavigationHelper GoToGroupPage()
         {
             driver.FindElement(By.LinkText("groups")).Click();
+            return this;
+
         }
-        public void GoToGroupsPage()
+        public NavigationHelper GoToGroupsPage()
         {
             driver.FindElement(By.LinkText("groups")).Click();
+            return this;
+
         }
-        public void ReturnToHomePage()
+        public NavigationHelper ReturnToHomePage()
         {
             driver.FindElement(By.LinkText("home page")).Click();
+            return this;
         }
 
 

@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.DevTools.V141.FedCm;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Internal;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,8 @@ namespace WebAddressbookTests
         public void SetupTest()
         {
          app = new ApplicationManager();
-
+         app.Navigator.OpenHomePage();
+         app.Auth.Login(new AccountData("admin", "secret"));
         }
 
         [TearDown]
