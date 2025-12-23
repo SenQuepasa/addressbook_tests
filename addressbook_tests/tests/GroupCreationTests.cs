@@ -20,7 +20,6 @@ namespace WebAddressbookTests
             group.Header = "B";
             group.Footer = "C";
             
-            app.Navigator.GoToGroupPage();
             app.Groups.Create(group);
             app.Navigator.ReturnToGroupsPage();
         }
@@ -32,7 +31,6 @@ namespace WebAddressbookTests
             group.Header = "";
             group.Footer = "";
 
-            app.Navigator.GoToGroupPage();
             app.Groups
                 .InitNewGroupCreation()
                 .FillGroupForm(group)
