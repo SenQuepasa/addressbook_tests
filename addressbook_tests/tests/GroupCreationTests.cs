@@ -23,21 +23,9 @@ namespace WebAddressbookTests
             GroupData group = new GroupData("A");
             group.Header = "B";
             group.Footer = "C";
-            FillGroupForm(group);
+            app.Groups.FillGroupForm(group);
             app.Groups.SubmitGroupCreation();
             app.Navigator.ReturnToGroupsPage();
-        }
-        private void FillGroupForm(GroupData group)
-        {
-            driver.FindElement(By.Name("group_name")).Click();
-            driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
-            driver.FindElement(By.Name("group_header")).Click();
-            driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
-            driver.FindElement(By.Name("group_footer")).Click();
-            driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
         }
     }
 }
