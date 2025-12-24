@@ -36,12 +36,7 @@ namespace WebAddressbookTests
             return this;
 
         }
-        public NavigationHelper GoToGroupsPage()
-        {
-            driver.FindElement(By.LinkText("groups")).Click();
-            return this;
-
-        }
+        
         public NavigationHelper ReturnToHomePage()
         {
             driver.FindElement(By.LinkText("home page")).Click();
