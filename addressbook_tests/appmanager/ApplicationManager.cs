@@ -24,10 +24,10 @@ namespace WebAddressbookTests
         public ApplicationManager()
         {
             this.driver = new FirefoxDriver();
-            baseURL = "http://localhost";
+            baseURL = "http://localhost/addressbook";
 
             loginHelper = new LoginHelper(this);
-            navigator = new NavigationHelper(this);
+            navigator = new NavigationHelper(this, baseURL);
             groupHelper = new GroupHelper(this);
             contactHelper = new ContactHelper(this);
         }

@@ -23,6 +23,14 @@ namespace WebAddressbookTests
             SubmitGroupCreation();
             return this;
         }
+        public GroupHelper Remove(int v)
+        {
+            manager.Navigator.GoToGroupsPage();
+            SelectGroup(1);
+            RemoveGroup();
+            manager.Navigator.ReturnToGroupsPage();
+            return this;
+        }
         public GroupHelper InitNewGroupCreation()
         {
             driver.FindElement(By.Name("new")).Click();
@@ -62,5 +70,6 @@ namespace WebAddressbookTests
 
         }
 
+        
     }
 }

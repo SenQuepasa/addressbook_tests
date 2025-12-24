@@ -31,10 +31,7 @@ namespace WebAddressbookTests
             group.Header = "";
             group.Footer = "";
 
-            app.Groups
-                .InitNewGroupCreation()
-                .FillGroupForm(group)
-                .SubmitGroupCreation();
+            app.Groups.Create(group);
             app.Navigator.ReturnToGroupsPage();
         }
     }
