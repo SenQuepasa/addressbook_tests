@@ -111,7 +111,7 @@ namespace WebAddressbookTests
         }
         public ContactHelper SelectContact(int index)
         {
-            driver.FindElement(By.Id("4")).Click();
+            driver.FindElement(By.XPath("//input[@type='checkbox']")).Click();
             return this;
 
         }
