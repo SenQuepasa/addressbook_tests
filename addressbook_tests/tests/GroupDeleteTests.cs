@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class GroupDeleteTests : TestBase
+    public class GroupDeleteTests : AuthTestBase
     {
         [Test]
         public void GroupDeleteTest()
