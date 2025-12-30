@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using NUnit.Framework;
+
 
 namespace WebAddressbookTests
 
@@ -19,10 +21,13 @@ namespace WebAddressbookTests
         {
             this.baseURL = baseURL;
         }
-        public NavigationHelper OpenHomePage()
+        public void OpenHomePage()
         {
-            driver.Navigate().GoToUrl(baseURL);
-            return this;
+            if (driver.Url == baseURL + "/addressbook/")
+            {
+                return;
+            }
+            driver.Navigate().GoToUrl(baseURL + "/addressbook/");
         }
         public NavigationHelper ReturnToGroupsPage()
         {
@@ -30,11 +35,14 @@ namespace WebAddressbookTests
             return this;
 
         }
-        public NavigationHelper GoToGroupPage()
+        public void GoToGroupPage()
         {
+            if (driver.Url == baseURL + "/addressbook/group.php"
+                && IsElementPresent(By.Name("new")))
+            {
+                return;
+            }
             driver.FindElement(By.LinkText("groups")).Click();
-            return this;
-
         }
         
         public NavigationHelper ReturnToHomePage()
