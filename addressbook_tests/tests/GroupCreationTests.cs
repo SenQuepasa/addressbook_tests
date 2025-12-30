@@ -21,7 +21,7 @@ namespace WebAddressbookTests
             group.Footer = "C";
             
             app.Groups.Create(group);
-            app.Navigator.ReturnToGroupsPage();
+            app.Navigator.GoToGroupPage();
         }
 
         [Test]
@@ -32,7 +32,7 @@ namespace WebAddressbookTests
             group.Footer = "";
 
             app.Groups.Create(group);
-            app.Navigator.ReturnToGroupsPage();
+            app.Navigator.GoToGroupPage();
         }
     }
 }

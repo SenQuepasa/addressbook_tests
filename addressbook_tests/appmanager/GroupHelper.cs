@@ -30,7 +30,6 @@ namespace WebAddressbookTests
             InitGroupModification();
             FillGroupForm(newData);
             SubmitGroupModification();
-            manager.Navigator.ReturnToGroupsPage();
             manager.Navigator.ReturnToHomePage();
             return this;
         }
@@ -52,7 +51,7 @@ namespace WebAddressbookTests
             manager.Navigator.GoToGroupPage();
             SelectGroup(v);
             RemoveGroup();
-            manager.Navigator.ReturnToGroupsPage();
+            manager.Navigator.GoToGroupPage();
             return this;
         }
         public GroupHelper InitNewGroupCreation()

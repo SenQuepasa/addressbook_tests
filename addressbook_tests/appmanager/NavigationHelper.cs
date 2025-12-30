@@ -24,12 +24,7 @@ namespace WebAddressbookTests
             driver.Navigate().GoToUrl(baseURL);
             return this;
         }
-        public NavigationHelper ReturnToGroupsPage()
-        {
-            driver.FindElement(By.LinkText("group page")).Click();
-            return this;
-
-        }
+       
         public NavigationHelper GoToGroupPage()
         {
             driver.FindElement(By.LinkText("groups")).Click();
