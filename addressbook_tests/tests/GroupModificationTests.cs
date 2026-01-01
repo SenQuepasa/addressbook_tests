@@ -16,11 +16,29 @@ namespace WebAddressbookTests {
         [Test]
         public void GroupModificationTest()
     {
-        GroupData newData = new GroupData("DDD");
-        newData.Header = "EEE";
-        newData.Footer = "FFF";
+            app.Navigator.GoToGroupPage();
+            if (app.Groups.ThereisNoGroups())
+            {
+                GroupData group = new GroupData("ничего не было");
+                group.Header = "ничего не было";
+                group.Footer = "ничего не было";
 
-        app.Groups.Modify(1, newData);
-    }
+                app.Groups.Create(group);
+
+                GroupData group1 = new GroupData("стало новое значение");
+                group.Header = "стало новое значение";
+                group.Footer = "стало новое значение";
+
+                app.Groups.Modify(1, group1);
+            }
+            else
+            {
+                GroupData newData = new GroupData("333");
+                newData.Header = "EEE";
+                newData.Footer = "FFF";
+
+                app.Groups.Modify(1, newData);
+            }
+        }
     }
 }

@@ -45,6 +45,10 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("edit")).Click();
             return this;
         }
+        public bool ThereisNoGroups()
+        {
+            return IsElementNotPresent(By.CssSelector("input[name=\"selected[]\"]"));
+        }
 
         public GroupHelper Remove(int v)
         {

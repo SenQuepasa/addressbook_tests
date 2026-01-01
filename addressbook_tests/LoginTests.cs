@@ -21,7 +21,7 @@ namespace WebAddressbookTests
             app.Auth.Login(new AccountData("admin", "secret"));
 
             //verification
-            Assert.IsTrue(app.Auth.isLoggedIn(account));
+            Assert.IsTrue(app.Auth.IsLoggedIn(account));
 
         }
         [Test]
@@ -35,7 +35,7 @@ namespace WebAddressbookTests
             app.Auth.Login(account);
 
             //verification
-            Assert.IsFalse(app.Auth.isLoggedIn(account));
+            Assert.IsFalse(app.Auth.IsLoggedIn(account));
 
         }
     }

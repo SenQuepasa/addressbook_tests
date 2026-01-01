@@ -28,7 +28,7 @@ namespace WebAddressbookTests
             }
 
         }
-        public bool isElementPresent (By by)
+        public bool IsElementPresent (By by)
         {
             try
             {
@@ -38,6 +38,18 @@ namespace WebAddressbookTests
             catch (NoSuchElementException)
             {
                 return false; 
+            }
+        }
+        public bool IsElementNotPresent(By by)
+        {
+            try
+            {
+                driver.FindElement(by);
+                return false;
+            }
+            catch (NoSuchElementException)
+            {
+                return true;
             }
         }
     }
