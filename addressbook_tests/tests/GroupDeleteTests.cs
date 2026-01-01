@@ -12,7 +12,21 @@ namespace WebAddressbookTests
         [Test]
         public void GroupDeleteTest()
         {
-            app.Groups.Remove(1);
+            app.Navigator.GoToGroupPage();
+            if (app.Groups.ThereisNoGroups())
+            {
+                GroupData group = new GroupData("ничего не было");
+                group.Header = "ничего не было";
+                group.Footer = "ничего не было";
+
+                app.Groups.Create(group);
+
+                app.Groups.Remove(1);
+            }
+            else
+            {
+                app.Groups.Remove(1);
+            }
         }
     }
 }

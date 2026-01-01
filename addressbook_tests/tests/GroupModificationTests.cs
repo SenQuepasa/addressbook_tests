@@ -33,7 +33,7 @@ namespace WebAddressbookTests {
             }
             else
             {
-                GroupData newData = new GroupData("333");
+                GroupData newData = new GroupData("345");
                 newData.Header = "EEE";
                 newData.Footer = "FFF";
 

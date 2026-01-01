@@ -16,7 +16,16 @@ namespace WebAddressbookTests.tests
         [Test]
         public void ContactDeleteTest()
         {
-            app.Contacts.Remove(1);
+            if (app.Contacts.ThereisNoContacts())
+            {
+                ContactData newData = new ContactData("Семен", "Семенович", "Семенов", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                app.Contacts.Create(newData);
+                app.Contacts.Remove(1);
+            }
+            else
+            {
+                app.Contacts.Remove(1);
+            }
         }
     }
 }

@@ -23,7 +23,15 @@ namespace WebAddressbookTests
             
             return this;
         }
+        public ContactHelper Create(ContactData newData)
+        {
+            AddContact();
+            FillContactForm(newData);
+            SubmitContactCreation();
+            manager.Navigator.ReturnToHomePage();
 
+            return this;
+        }
         public ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.Name("update")).Click();
@@ -46,6 +54,10 @@ namespace WebAddressbookTests
             driver.FindElement(By.LinkText("add new")).Click();
             return this;
 
+        }
+        public bool ThereisNoContacts()
+        {
+            return IsElementNotPresent(By.CssSelector("input[name=\"selected[]\"]"));
         }
         public ContactHelper FillContactForm(ContactData contact)
         {
