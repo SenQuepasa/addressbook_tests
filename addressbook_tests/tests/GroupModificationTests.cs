@@ -13,6 +13,8 @@ namespace WebAddressbookTests {
     [TestFixture]
     public class GroupModificationTests : AuthTestBase
     {
+        public GroupData group;
+
         [Test]
         public void GroupModificationTest()
     {
@@ -20,7 +22,7 @@ namespace WebAddressbookTests {
         newData.Header = "EEE";
         newData.Footer = "FFF";
 
-        app.Groups.Modify(1, newData);
+        app.Groups.Modify(1, newData, group);
     }
     }
 }

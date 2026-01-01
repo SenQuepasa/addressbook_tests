@@ -23,16 +23,32 @@ namespace WebAddressbookTests
             SubmitGroupCreation();
             return this;
         }
-        public GroupHelper Modify(int v, GroupData newData)
+        public GroupHelper Modify(int v, GroupData newData, GroupData group)
         {
             manager.Navigator.GoToGroupPage();
-            SelectGroup(v);
-            InitGroupModification();
-            FillGroupForm(newData);
-            SubmitGroupModification();
-            manager.Navigator.ReturnToGroupsPage();
-            manager.Navigator.ReturnToHomePage();
-            return this;
+            if (ThereisNoGroups())
+            {
+                SelectGroup(v);
+                InitGroupModification();
+                FillGroupForm(newData);
+                SubmitGroupModification();
+                manager.Navigator.ReturnToGroupsPage();
+                manager.Navigator.ReturnToHomePage();
+            }
+            else
+            {
+                InitNewGroupCreation();
+                FillGroupForm(group);
+                SubmitGroupCreation();
+                manager.Navigator.ReturnToGroupsPage();
+                SelectGroup(v);
+                InitGroupModification();
+                FillGroupForm(newData);
+                SubmitGroupModification();
+                manager.Navigator.ReturnToGroupsPage();
+                manager.Navigator.ReturnToHomePage();
+            }
+                return this;
         }
 
         public GroupHelper SubmitGroupModification()
@@ -40,11 +56,15 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("update")).Click();
             return this;
         }
-
+       
+        public bool ThereisNoGroups()
+        {
+            return IsElementNotPresent(By.Name("selectd[]"));
+        }
         public GroupHelper InitGroupModification()
         {
-            driver.FindElement(By.Name("edit")).Click();
-            return this;
+                driver.FindElement(By.Name("edit")).Click();
+                return this;
         }
 
         public GroupHelper Remove(int v)
