@@ -20,12 +20,8 @@ namespace WebAddressbookTests.tests
             {
                 ContactData newData = new ContactData("Семен", "Семенович", "Семенов", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
                 app.Contacts.Create(newData);
-                app.Contacts.Remove(1);
             }
-            else
-            {
                 app.Contacts.Remove(1);
-            }
         }
     }
 }

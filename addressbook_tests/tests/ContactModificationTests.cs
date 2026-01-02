@@ -13,22 +13,20 @@ namespace WebAddressbookTests.tests
     [TestFixture]
     public class ContactModificationTests : AuthTestBase
     {
+        private ContactData newData;
+
         [Test]
         public void ContactModificationTest()
         {
             
             if (app.Contacts.ThereisNoContacts())
             {
-                ContactData newData = new ContactData("Семен", "Семенович", "Семенов", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
-                ContactData newestData = new ContactData("Агния", "Барто", "Семенова", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
-                app.Contacts.Create(newData);
-                app.Contacts.Modify(1, newestData);
+                ContactData newData1 = new ContactData("Семен", "Семенович", "Семенов", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                app.Contacts.Create(newData1);
             }
-            else
-            {
-                ContactData newData = new ContactData("Игорь", "Игоревич", "Игорев", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
-                app.Contacts.Modify(1, newData);
-            }
+            ContactData newData2 = new ContactData("Игорь", "Игоревич", "Игорев", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+            app.Contacts.Modify(1, newData2);
+
         }
     }
 }

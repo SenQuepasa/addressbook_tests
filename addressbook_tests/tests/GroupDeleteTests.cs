@@ -21,12 +21,8 @@ namespace WebAddressbookTests
 
                 app.Groups.Create(group);
 
-                app.Groups.Remove(1);
             }
-            else
-            {
                 app.Groups.Remove(1);
-            }
         }
     }
 }

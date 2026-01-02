@@ -28,17 +28,13 @@ namespace WebAddressbookTests {
                 GroupData group1 = new GroupData("стало новое значение");
                 group.Header = "стало новое значение";
                 group.Footer = "стало новое значение";
-
-                app.Groups.Modify(1, group1);
             }
-            else
-            {
-                GroupData newData = new GroupData("345");
-                newData.Header = "EEE";
-                newData.Footer = "FFF";
+            
+            GroupData newData = new GroupData("345");
+            newData.Header = "EEE";
+            newData.Footer = "FFF";
+            app.Groups.Modify(1, newData);
 
-                app.Groups.Modify(1, newData);
-            }
         }
     }
 }
