@@ -1,8 +1,9 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using NUnit.Framework;
 
 namespace WebAddressbookTests
 {
@@ -13,6 +14,8 @@ namespace WebAddressbookTests
         public void GroupDeleteTest()
         {
             app.Navigator.GoToGroupPage();
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
             if (app.Groups.ThereisNoGroups())
             {
                 GroupData group = new GroupData("ничего не было");
@@ -22,7 +25,10 @@ namespace WebAddressbookTests
                 app.Groups.Create(group);
 
             }
-                app.Groups.Remove(1);
+                app.Groups.Remove(0);
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups.RemoveAt(0);
+            Assert.AreEqual(oldGroups, newGroups);
         }
     }
 }
