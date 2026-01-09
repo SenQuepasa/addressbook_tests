@@ -16,12 +16,17 @@ namespace WebAddressbookTests.tests
         [Test]
         public void ContactDeleteTest()
         {
+            List<ContactData> oldStrings = app.Contacts.GetContactStrings();
             if (app.Contacts.ThereisNoContacts())
             {
                 ContactData newData = new ContactData("Семен", "Семенович", "Семенов", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
                 app.Contacts.Create(newData);
             }
                 app.Contacts.Remove(1);
+            List<ContactData> newStrings = app.Contacts.GetContactStrings();
+            oldStrings.Sort();
+            newStrings.Sort();
+            Assert.AreEqual(oldStrings, newStrings);
         }
     }
 }

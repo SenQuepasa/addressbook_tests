@@ -18,7 +18,7 @@ namespace WebAddressbookTests.tests
         [Test]
         public void ContactModificationTest()
         {
-            
+            List<ContactData> oldStrings = app.Contacts.GetContactStrings();
             if (app.Contacts.ThereisNoContacts())
             {
                 ContactData newData1 = new ContactData("Семен", "Семенович", "Семенов", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
@@ -26,7 +26,10 @@ namespace WebAddressbookTests.tests
             }
             ContactData newData2 = new ContactData("Игорь", "Игоревич", "Игорев", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
             app.Contacts.Modify(1, newData2);
-
+            List<ContactData> newStrings = app.Contacts.GetContactStrings();
+            oldStrings.Sort();
+            newStrings.Sort();
+            Assert.AreEqual(oldStrings, newStrings);
         }
     }
 }
