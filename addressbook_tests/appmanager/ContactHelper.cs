@@ -111,27 +111,23 @@ namespace WebAddressbookTests
             return this;
 
         }
-        public List<ContactString> GetContactStrings()
+        public List<ContactData> GetContactStrings()
         {
             manager.Navigator.ReturnToHomePage();
-            List<ContactString> contactStrings = new List<ContactString>();
+            List<ContactData> contactStrings = new List<ContactData>();
             ICollection<IWebElement> strings = driver.FindElements(By.XPath("//tr[@name='entry']"));
             foreach (IWebElement element in strings)
             {
-                contactStrings.Add(new ContactString(element.Text, element.Text));
+                IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+               // contactStrings.Add(new ContactData(element.Text, element.Text));
+                string firstname = cells[2].Text;
+                string lastname = cells[1].Text;
+                contactStrings.Add(new ContactData(cells[2].Text, cells[1].Text));
+
             }
             return contactStrings;
+
         }
-        public List<ContactData> GetContactList()
-        {
-            manager.Navigator.ReturnToHomePage();
-            List<ContactData> contacts = new List<ContactData>();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("input[name=\"selected[]\"]"));
-            foreach (IWebElement element in elements)
-            {
-                contacts.Add(new ContactData(element.Text, element.Text, element.Text, element.Text, element.Text, element.Text, element.Text, element.Text, element.Text, element.Text, element.Text, element.Text, element.Text, element.Text, element.Text, element.Text, element.Text, element.Text, element.Text, element.Text));
-            }
-            return contacts;
-        }
+
     }
 }

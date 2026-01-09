@@ -143,7 +143,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthTestBase.cs" />
-    <Compile Include="model\ContactString.cs" />
     <Compile Include="LoginTests.cs" />
     <Compile Include="model\AccountData.cs" />
     <Compile Include="appmanager\ApplicationManager.cs" />

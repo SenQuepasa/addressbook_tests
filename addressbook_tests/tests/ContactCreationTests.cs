@@ -17,8 +17,8 @@ namespace WebAddressbookTests
         [Test]
         public void ContactCreationTests()
         {
-            //  List<ContactData> oldContacts = app.Contacts.GetContactList();
-            List<ContactString> oldStrings = app.Contacts.GetContactStrings();
+          //  List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldStrings = app.Contacts.GetContactStrings();
             app.Contacts.AddContact();
             ContactData contact = new ContactData("Ivan", "Ivanovich", "Ivanov", "", "", "", "", "", "", "", "", "", "", "", "","","","","","");
             app.Contacts
@@ -26,9 +26,9 @@ namespace WebAddressbookTests
                 .SubmitContactCreation();
             app.Navigator.ReturnToHomePage();
 
-            // List<ContactData> newContacts = app.Contacts.GetContactList();
-            List<ContactString> newStrings = app.Contacts.GetContactStrings();
-           // oldStrings.Add(contact);
+           // List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newStrings = app.Contacts.GetContactStrings();
+            oldStrings.Add(contact);
             oldStrings.Sort();
             newStrings.Sort();
             Assert.AreEqual(oldStrings, newStrings);
