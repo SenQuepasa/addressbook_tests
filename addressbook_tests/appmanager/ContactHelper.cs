@@ -111,7 +111,17 @@ namespace WebAddressbookTests
             return this;
 
         }
-
+        public List<ContactString> GetContactStrings()
+        {
+            manager.Navigator.ReturnToHomePage();
+            List<ContactString> contactStrings = new List<ContactString>();
+            ICollection<IWebElement> strings = driver.FindElements(By.XPath("//tr[@name='entry']"));
+            foreach (IWebElement element in strings)
+            {
+                contactStrings.Add(new ContactString(element.Text, element.Text));
+            }
+            return contactStrings;
+        }
         public List<ContactData> GetContactList()
         {
             manager.Navigator.ReturnToHomePage();
