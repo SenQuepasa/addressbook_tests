@@ -68,6 +68,13 @@ namespace WebAddressbookTests
             {
                 return true;
             }
+            if (Lastname == other.Lastname)
+                { 
+                if (Firstname == other.Firstname)
+                {
+                    return true;
+                }
+            }
             return Firstname == other.Firstname;
 
         }

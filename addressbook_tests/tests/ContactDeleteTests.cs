@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace WebAddressbookTests.tests
 {
@@ -26,6 +27,7 @@ namespace WebAddressbookTests.tests
             List<ContactData> newStrings = app.Contacts.GetContactStrings();
             oldStrings.Sort();
             newStrings.Sort();
+            oldStrings.RemoveAt(0);
             Assert.AreEqual(oldStrings, newStrings);
         }
     }
