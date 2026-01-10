@@ -75,7 +75,7 @@ namespace WebAddressbookTests
                     return true;
                 }
             }
-            return Firstname == other.Firstname;
+            return Firstname == other.Firstname && Lastname == other.Lastname;
 
         }
 
