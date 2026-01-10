@@ -17,7 +17,6 @@ namespace WebAddressbookTests
         [Test]
         public void ContactCreationTests()
         {
-          //  List<ContactData> oldContacts = app.Contacts.GetContactList();
             List<ContactData> oldStrings = app.Contacts.GetContactStrings();
             app.Contacts.AddContact();
             ContactData contact = new ContactData("Ivan", "Ivanovich", "Ivanov", "", "", "", "", "", "", "", "", "", "", "", "","","","","","");
@@ -26,7 +25,6 @@ namespace WebAddressbookTests
                 .SubmitContactCreation();
             app.Navigator.ReturnToHomePage();
 
-           // List<ContactData> newContacts = app.Contacts.GetContactList();
             List<ContactData> newStrings = app.Contacts.GetContactStrings();
             oldStrings.Add(contact);
             oldStrings.Sort();

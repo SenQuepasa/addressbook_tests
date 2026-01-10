@@ -20,7 +20,6 @@ namespace WebAddressbookTests
             FillContactForm(newData);
             SubmitContactModification();
             manager.Navigator.ReturnToHomePage();
-            
             return this;
         }
         public ContactHelper Create(ContactData newData)
@@ -29,12 +28,12 @@ namespace WebAddressbookTests
             FillContactForm(newData);
             SubmitContactCreation();
             manager.Navigator.ReturnToHomePage();
-
             return this;
         }
         public ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            contactCache = null;
             return this;
         }
 
@@ -47,6 +46,7 @@ namespace WebAddressbookTests
         public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[19]")).Click();
+            contactCache = null;
             return this;
         }
         public ContactHelper AddContact()
@@ -97,6 +97,7 @@ namespace WebAddressbookTests
             SelectContact(v);
             RemoveContact();
             manager.Navigator.ReturnToHomePage();
+            contactCache = null;
             return this;
         }
         public ContactHelper SelectContact(int index)
@@ -111,21 +112,25 @@ namespace WebAddressbookTests
             return this;
 
         }
+        private List<ContactData> contactCache = null;
+
         public List<ContactData> GetContactStrings()
         {
-            manager.Navigator.ReturnToHomePage();
-            List<ContactData> contactStrings = new List<ContactData>();
-            ICollection<IWebElement> strings = driver.FindElements(By.XPath("//tr[@name='entry']"));
-            foreach (IWebElement element in strings)
+            if (contactCache == null)
             {
-                IList<IWebElement> cells = element.FindElements(By.TagName("td"));
-               // contactStrings.Add(new ContactData(element.Text, element.Text));
-                string firstname = cells[2].Text;
-                string lastname = cells[1].Text;
-                contactStrings.Add(new ContactData(cells[2].Text, cells[1].Text));
-
+                contactCache = new List<ContactData>();
+                manager.Navigator.ReturnToHomePage();
+                ICollection<IWebElement> strings = driver.FindElements(By.XPath("//tr[@name='entry']"));
+                foreach (IWebElement element in strings)
+                {
+                    IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+                    string firstname = cells[2].Text;
+                    string lastname = cells[1].Text;
+                    contactCache.Add(new ContactData(cells[2].Text, cells[1].Text));
+                }
             }
-            return contactStrings;
+            
+            return new List<ContactData>(contactCache);
 
         }
 

@@ -23,6 +23,10 @@ namespace WebAddressbookTests
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
             app.Groups.Create(group);
+
+            Assert.AreEqual(oldGroups.Count +1, app.Groups.GetGroupCount());
+
+
             app.Navigator.GoToGroupPage();
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
@@ -43,6 +47,9 @@ namespace WebAddressbookTests
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
             app.Groups.Create(group);
+
+            Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
+
             app.Navigator.GoToGroupPage();
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
