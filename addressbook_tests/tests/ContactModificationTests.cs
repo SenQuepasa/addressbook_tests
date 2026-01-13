@@ -18,6 +18,7 @@ namespace WebAddressbookTests.tests
         [Test]
         public void ContactModificationTest()
         {
+            app.Navigator.ReturnToHomePage();
             List<ContactData> oldStrings = app.Contacts.GetContactStrings();
             if (app.Contacts.ThereisNoContacts())
             {
