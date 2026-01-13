@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace WebAddressbookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
+        private string allPhones;
+
         public ContactData(string firstname, string lastname)
         {
             Firstname = firstname;
@@ -22,9 +25,9 @@ namespace WebAddressbookTests
             Title = title;
             Company = company;
             Address = address;
-            Home = home;
-            Mobile = mobile;
-            Work = work;
+            HomePhone = home;
+            MobilePhone = mobile;
+            WorkPhone = work;
             Email = email;
             Email2 = email2;
             Email3 = email3;
@@ -90,9 +93,37 @@ namespace WebAddressbookTests
         public string Title { get; set; }
         public string Company { get; set; }
         public string Address { get; set; }
-        public string Home { get; set; }
-        public string Mobile { get; set; }
-        public string Work { get; set; }
+        public string HomePhone { get; set; }
+        public string MobilePhone { get; set; }
+        public string WorkPhone { get; set; }
+        public string AllPhones 
+        { 
+            get {
+                if (allPhones !=null)
+                {
+                    return allPhones;
+                }
+                else
+                {
+                    return CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone).Trim();
+                }
+            } 
+            set 
+            {
+                allPhones = value;
+            } 
+        }
+
+        public string CleanUp(string phone)
+        {
+            if (phone == null || phone == "")
+            {
+                return "";
+            }
+           return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "")+"\r\n";
+
+        }
+
         public string Email { get; set; }
         public string Email2 { get; set; }
         public string Email3 { get; set; }

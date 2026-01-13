@@ -142,8 +142,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthTestBase.cs" />
-    <Compile Include="LoginTests.cs" />
+    <Compile Include="tests\AuthTestBase.cs" />
+    <Compile Include="tests\ContactInformationTests.cs" />
+    <Compile Include="tests\LoginTests.cs" />
     <Compile Include="model\AccountData.cs" />
     <Compile Include="appmanager\ApplicationManager.cs" />
     <Compile Include="model\ContactData.cs" />
