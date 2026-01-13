@@ -23,12 +23,14 @@ namespace WebAddressbookTests.tests
                 ContactData newData = new ContactData("Семен", "Семенович", "Семенов", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
                 app.Contacts.Create(newData);
             }
-                app.Contacts.Remove(1);
+                app.Contacts.Remove(0);
             List<ContactData> newStrings = app.Contacts.GetContactStrings();
+            oldStrings.RemoveAt(0);
             oldStrings.Sort();
             newStrings.Sort();
-            oldStrings.RemoveAt(0);
             Assert.AreEqual(oldStrings, newStrings);
+
+  
         }
     }
 }

@@ -27,8 +27,8 @@ namespace WebAddressbookTests.tests
             ContactData newData2 = new ContactData("Игорь", "Игоревич", "Игорев", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
             app.Contacts.Modify(1, newData2);
             List<ContactData> newStrings = app.Contacts.GetContactStrings();
-            oldStrings[1].Firstname = newData2.Firstname;
-            oldStrings[1].Lastname = newData2.Lastname;
+            oldStrings[0].Firstname = newData2.Firstname;
+            oldStrings[0].Lastname = newData2.Lastname;
             oldStrings.Sort();
             newStrings.Sort();
             Assert.AreEqual(oldStrings, newStrings);

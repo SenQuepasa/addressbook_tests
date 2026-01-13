@@ -74,6 +74,12 @@ namespace WebAddressbookTests
             {
                 return 1;
             }
+
+            int lastnameComparison = Lastname.CompareTo(other.Lastname);
+            if (lastnameComparison != 0)
+            {
+                return lastnameComparison;
+            }
             return Firstname.CompareTo(other.Firstname);
         }
         public string Firstname { get; set; }
@@ -97,5 +103,7 @@ namespace WebAddressbookTests
         public string Aday { get; set; }
         public string Amonth { get; set; }
         public string Ayear { get; set; }
+        public string Id { get; set; }
+
     }
 }
