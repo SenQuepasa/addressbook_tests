@@ -94,6 +94,7 @@ namespace WebAddressbookTests
         }
         public ContactHelper Remove(int v)
         {
+            manager.Navigator.ReturnToHomePage();
             SelectContact(v);
             RemoveContact();
             manager.Navigator.ReturnToHomePage();
