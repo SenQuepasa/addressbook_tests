@@ -108,8 +108,8 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return FirstName + Middlename + Lastname + Nickname + Title + Company + Address + HomePhone + MobilePhone + WorkPhone + Email + Email2 + Email3 + Homepage
-                    + Bday + Bmonth + Byear + Ayear + Amonth + Ayear;
+                    return CleanUp(FirstName) + CleanUp(Middlename) + CleanUp(Lastname) + CleanUp(Nickname) + CleanUp(Title) + CleanUp(Company) + CleanUp(Address) + CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone) + CleanUp(Email) + CleanUp(Email2) + CleanUp(Email3) + CleanUp(Homepage)
+                    + CleanUp(Bday) + CleanUp(Bmonth) + CleanUp(Byear) + CleanUp(Ayear) + CleanUp(Amonth) + CleanUp(Ayear);
                 }
             }
             set
@@ -150,7 +150,7 @@ namespace WebAddressbookTests
             }
             set
             {
-                AllEmails = value;
+                allEmails = value;
             }
         }
 
@@ -177,5 +177,6 @@ namespace WebAddressbookTests
         public string Ayear { get; set; }
         public string Id { get; set; }
         public string FirstName { get; set;}
+        public string LastName { get; internal set; }
     }
 }

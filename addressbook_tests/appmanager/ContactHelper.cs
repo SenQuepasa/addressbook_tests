@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace WebAddressbookTests
@@ -169,11 +170,15 @@ namespace WebAddressbookTests
 
             return new ContactData(firstName, lastName)
             {
-                AllInfo = allInfo
+                AllInfo = CleanUp(allInfo)
             };
 
         }
+        public string CleanUp(string info)
+        {
+            return Regex.Replace(info, "[ - ()]", "");
 
+        }
 
 
         public ContactData GetContactInformationFromEditForm(int index)
@@ -211,8 +216,10 @@ namespace WebAddressbookTests
 
             return new ContactData(firstName, lastName)
             {
-                Address = address,
+                FirstName = firstName,
+                LastName = lastName,
                 Middlename = middlename,
+                Address = address,
                 Nickname = nickname,
                 Company = company,
                 Title = title,
