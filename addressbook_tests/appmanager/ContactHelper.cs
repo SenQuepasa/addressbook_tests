@@ -176,7 +176,7 @@ namespace WebAddressbookTests
         }
         public string CleanUp(string info)
         {
-            return Regex.Replace(info, "[ - ()]", "");
+            return Regex.Replace(info, "[ - () \r\n]", "");
 
         }
 
@@ -212,31 +212,61 @@ namespace WebAddressbookTests
             string amonth = driver.FindElement(By.Name("amonth")).GetAttribute("value");
             string ayear = driver.FindElement(By.Name("ayear")).GetAttribute("value");
 
+            string result = string.Concat(
+(
+    firstName,
+    middlename,
+    lastName,
+    nickname,
+    company,
+    title,
+    address,
+    homePhone,
+    mobilePhone,
+    workPhone,
+    email,
+    email2,
+    email3,
+    homepage,
+    bday,
+    bmonth,
+    byear,
+    aday,
+    amonth,
+    ayear
+));
+            result = result.Replace(" ", "")
+                .Replace("\t", "")
+                .Replace("\n", "")
+                .Replace("\r", "");
 
 
             return new ContactData(firstName, lastName)
-            {
-                FirstName = firstName,
-                LastName = lastName,
-                Middlename = middlename,
-                Address = address,
-                Nickname = nickname,
-                Company = company,
-                Title = title,
-                HomePhone = homePhone,
-                MobilePhone = mobilePhone,
-                WorkPhone = workPhone,
-                Email = email,
-                Email2 = email2,
-                Email3 = email3,
-                Homepage = homepage,
-                Bday = bday,
-                Bmonth = bmonth,
-                Byear = byear,
-                Aday = aday,
-                Amonth = amonth,
-                Ayear = ayear
-            };
+            { Result = result };
+
+            //return new ContactData(firstName, lastName)
+            //  {
+            //    FirstName = firstName,
+            //  LastName = lastName,
+            //Middlename = middlename,
+            //Address = address,
+            //    Nickname = nickname,
+            //      Company = company,
+            //      Title = title,
+            //      HomePhone = homePhone,
+            //      MobilePhone = mobilePhone,
+            //     WorkPhone = workPhone,
+            //      Email = email,
+            //     Email2 = email2,
+            ////     Email3 = email3,
+            //  Homepage = homepage,
+            //      Bday = bday,
+            //    Bmonth = bmonth,
+            //     Byear = byear,
+            //    Aday = aday,
+            //     Amonth = amonth,
+            //    Ayear = ayear
+            // };
         }
         }
     }

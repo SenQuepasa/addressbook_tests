@@ -178,5 +178,7 @@ namespace WebAddressbookTests
         public string Id { get; set; }
         public string FirstName { get; set;}
         public string LastName { get; internal set; }
+        public string Fio { get; internal set; }
+        public string Result { get; internal set; }
     }
 }
