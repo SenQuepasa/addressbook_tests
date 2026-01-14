@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace WebAddressbookTests
 {
@@ -11,7 +12,7 @@ namespace WebAddressbookTests
     {
         private string allPhones;
         private string allEmails;
-
+        private string allInfo;
 
         public ContactData(string firstname, string lastname)
         {
@@ -88,7 +89,6 @@ namespace WebAddressbookTests
             return Firstname.CompareTo(other.Firstname);
         }
         public string Firstname { get; set; }
-        
         public string Middlename { get; set; }
         public string Lastname { get; set; }
         public string Nickname { get; set; }
@@ -98,6 +98,26 @@ namespace WebAddressbookTests
         public string HomePhone { get; set; }
         public string MobilePhone { get; set; }
         public string WorkPhone { get; set; }
+        public string AllInfo
+        {
+            get
+            {
+                if (allInfo != null)
+                {
+                    return allInfo;
+                }
+                else
+                {
+                    return FirstName + Middlename + Lastname + Nickname + Title + Company + Address + HomePhone + MobilePhone + WorkPhone + Email + Email2 + Email3 + Homepage
+                    + Bday + Bmonth + Byear + Ayear + Amonth + Ayear;
+                }
+            }
+            set
+            {
+                allInfo = value;
+            }
+        }
+
         public string AllPhones 
         { 
             get {
@@ -141,7 +161,7 @@ namespace WebAddressbookTests
             {
                 return "";
             }
-           return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "")+"\r\n";
+           return Regex.Replace(phone, "[ - ()]","") + "\r\n";
 
         }
 
@@ -156,6 +176,6 @@ namespace WebAddressbookTests
         public string Amonth { get; set; }
         public string Ayear { get; set; }
         public string Id { get; set; }
-
+        public string FirstName { get; set;}
     }
 }
