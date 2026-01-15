@@ -178,7 +178,7 @@ namespace WebAddressbookTests
         }
         public string CleanUp(string info)
         {
-            return Regex.Replace(info, "[- () \r]", "");
+            return Regex.Replace(info, "[- ()]", "");
 
         }
 
@@ -241,9 +241,9 @@ namespace WebAddressbookTests
 
             string address = driver.FindElement(By.Name("address")).GetAttribute("value") + "\r\n";
 
-            string homePhone = "H:" + driver.FindElement(By.Name("home")).GetAttribute("value");
-            string mobilePhone = "M:" + driver.FindElement(By.Name("mobile")).GetAttribute("value");
-            string workPhone = "W:" + driver.FindElement(By.Name("work")).GetAttribute("value") + "\r\n";
+            string homePhone = "H:" + CleanUp(driver.FindElement(By.Name("home")).GetAttribute("value"));
+            string mobilePhone = "M:" + CleanUp(driver.FindElement(By.Name("mobile")).GetAttribute("value"));
+            string workPhone = "W:" + CleanUp(driver.FindElement(By.Name("work")).GetAttribute("value")) + "\r\n";
 
             string email = driver.FindElement(By.Name("email")).GetAttribute("value");
             string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");

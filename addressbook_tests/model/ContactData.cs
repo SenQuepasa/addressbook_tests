@@ -122,7 +122,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return CleanUp(Firstname) + CleanUp(Middlename) + CleanUp(Lastname) + CleanUp(Nickname) + CleanUp(Title) + CleanUp(Company) + CleanUp(Address) + CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone) + CleanUp(Email) + CleanUp(Email2) + CleanUp(Email3) + CleanUp(Homepage)
+                    return CleanUp(Firstname).Trim() + CleanUp(Middlename).Trim() + CleanUp(Lastname) + CleanUp(Nickname) + CleanUp(Title) + CleanUp(Company) + CleanUp(Address) + CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone) + CleanUp(Email) + CleanUp(Email2) + CleanUp(Email3).Trim() + CleanUp(Homepage)
                     + CleanUp(Bday) + CleanUp(Bmonth) + CleanUp(Byear) + CleanUp(Ayear) + CleanUp(Amonth) + CleanUp(Ayear);
                 }
             }
@@ -175,7 +175,7 @@ namespace WebAddressbookTests
             {
                 return "";
             }
-           return Regex.Replace(phone, "[ - ()]","") + "\r\n";
+           return Regex.Replace(phone, "[- ()]","") + "\r\n";
 
         }
 
