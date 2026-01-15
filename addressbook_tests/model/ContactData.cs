@@ -15,12 +15,22 @@ namespace WebAddressbookTests
         private string allInfo;
 
 
+
+        public ContactData(string firstname, string lastname, string middlename, string fullname)
+        {
+            Firstname = firstname;
+            Lastname = lastname;
+            FullName = fullname;
+            Middlename = middlename;
+
+        }
         public ContactData(string firstname, string lastname)
         {
             Firstname = firstname;
             Lastname = lastname;
-
         }
+
+
         public ContactData(string firstname, string middlename, string lastname, string nickname, string title, string company, string address, string home, string mobile, string work, string email, string email2, string email3, string homepage, string bday, string bmonth, string byear, string aday, string amonth, string ayear)
         {
             Firstname = firstname;
