@@ -14,10 +14,12 @@ namespace WebAddressbookTests
         private string allEmails;
         private string allInfo;
 
+
         public ContactData(string firstname, string lastname)
         {
             Firstname = firstname;
             Lastname = lastname;
+
         }
         public ContactData(string firstname, string middlename, string lastname, string nickname, string title, string company, string address, string home, string mobile, string work, string email, string email2, string email3, string homepage, string bday, string bmonth, string byear, string aday, string amonth, string ayear)
         {
@@ -98,6 +100,8 @@ namespace WebAddressbookTests
         public string HomePhone { get; set; }
         public string MobilePhone { get; set; }
         public string WorkPhone { get; set; }
+        public string FullName { get; set; }
+
         public string AllInfo
         {
             get
@@ -178,7 +182,6 @@ namespace WebAddressbookTests
         public string Id { get; set; }
         public string FirstName { get; set;}
         public string LastName { get; internal set; }
-        public string Fio { get; internal set; }
         public string Result { get; internal set; }
     }
 }

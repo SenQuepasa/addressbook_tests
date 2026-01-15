@@ -26,7 +26,7 @@ namespace WebAddressbookTests.tests
                 app.Contacts.Create(newData1);
             }
             ContactData newData2 = new ContactData("Игорь", "Игоревич", "Игорев", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
-            app.Contacts.Modify(1, newData2);
+            app.Contacts.Modify(0, newData2);
             List<ContactData> newStrings = app.Contacts.GetContactStrings();
             oldStrings[0].Firstname = newData2.Firstname;
             oldStrings[0].Lastname = newData2.Lastname;
