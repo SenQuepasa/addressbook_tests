@@ -208,8 +208,8 @@ namespace WebAddressbookTests
 
             return new ContactData(firstName, lastName)
               {
-                FirstName = firstName,
-              LastName = lastName,
+                Firstname = firstName,
+              Lastname = lastName,
             Middlename = middlename,
             Address = address,
                 Nickname = nickname,

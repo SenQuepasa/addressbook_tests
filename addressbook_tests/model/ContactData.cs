@@ -101,7 +101,7 @@ namespace WebAddressbookTests
         public string MobilePhone { get; set; }
         public string WorkPhone { get; set; }
         public string FullName { get; set; }
-
+        
         public string AllInfo
         {
             get
@@ -112,7 +112,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return CleanUp(FirstName) + CleanUp(Middlename) + CleanUp(Lastname) + CleanUp(Nickname) + CleanUp(Title) + CleanUp(Company) + CleanUp(Address) + CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone) + CleanUp(Email) + CleanUp(Email2) + CleanUp(Email3) + CleanUp(Homepage)
+                    return CleanUp(Firstname) + CleanUp(Middlename) + CleanUp(Lastname) + CleanUp(Nickname) + CleanUp(Title) + CleanUp(Company) + CleanUp(Address) + CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone) + CleanUp(Email) + CleanUp(Email2) + CleanUp(Email3) + CleanUp(Homepage)
                     + CleanUp(Bday) + CleanUp(Bmonth) + CleanUp(Byear) + CleanUp(Ayear) + CleanUp(Amonth) + CleanUp(Ayear);
                 }
             }
@@ -180,8 +180,6 @@ namespace WebAddressbookTests
         public string Amonth { get; set; }
         public string Ayear { get; set; }
         public string Id { get; set; }
-        public string FirstName { get; set;}
-        public string LastName { get; internal set; }
-        public string Result { get; internal set; }
+      
     }
 }
