@@ -16,11 +16,11 @@ namespace WebAddressbookTests
 
 
 
-        public ContactData(string firstname, string lastname, string middlename, string fullname)
+        public ContactData(string firstname, string lastname, string middlename)
         {
             Firstname = firstname;
             Lastname = lastname;
-            FullName = fullname;
+        //    FullName = fullname;
             Middlename = middlename;
 
         }
@@ -83,7 +83,7 @@ namespace WebAddressbookTests
 
         public override string ToString()
         {
-            return Firstname;
+            return Firstname + Lastname + Middlename;
         }
 
         public int CompareTo(ContactData other)

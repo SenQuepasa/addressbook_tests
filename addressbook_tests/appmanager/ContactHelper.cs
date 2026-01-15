@@ -251,7 +251,7 @@ namespace WebAddressbookTests
 
 
 
-            return new ContactData(firstName, lastName, middleName, fullname)
+            return new ContactData(firstName, lastName, middleName)
             {
           //      Firstname = firstName,
               //  Middlename = middleName,
