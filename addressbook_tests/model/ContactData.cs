@@ -141,7 +141,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone).Trim();
+                    return CleanUp(HomePhone).Trim() + CleanUp(MobilePhone).Trim() + CleanUp(WorkPhone).Trim();
                 }
             } 
             set 

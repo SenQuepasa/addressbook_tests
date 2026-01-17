@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using WebAddressbookTests;
 
 
-namespace addressbook_rest_data_generators
+namespace addressbook_test_data_generators
 {
     class Program
     {
@@ -22,6 +22,7 @@ namespace addressbook_rest_data_generators
                     TestBase.GenerateRandomString(10),
                     TestBase.GenerateRandomString(10)));
             }
+            writer.Close();
         }
     }
 }

@@ -157,7 +157,7 @@ namespace WebAddressbookTests
             return new ContactData(firstName, lastName)
             {
                 Address = address,
-                AllPhones = allPhones,
+                AllPhones = CleanUpPhone(allPhones).Trim(),
                 AllEmails = allEmails
 
             };
@@ -172,13 +172,18 @@ namespace WebAddressbookTests
 
             return new ContactData(firstName, lastName)
             {
-                AllInfo = CleanUp(allInfo)
+                AllInfo = CleanUp(allInfo).Trim()
             };
 
         }
         public string CleanUp(string info)
         {
             return Regex.Replace(info, "[- ()]", "");
+
+        }
+        public string CleanUpPhone(string info)
+        {
+            return Regex.Replace(info, "[- ()\r\n]", "");
 
         }
 
@@ -197,9 +202,9 @@ namespace WebAddressbookTests
 
             string address = driver.FindElement(By.Name("address")).GetAttribute("value");
 
-            string homePhone = CleanUp(driver.FindElement(By.Name("home")).GetAttribute("value"));
-            string mobilePhone = CleanUp(driver.FindElement(By.Name("mobile")).GetAttribute("value"));
-            string workPhone = CleanUp(driver.FindElement(By.Name("work")).GetAttribute("value"));
+            string homePhone = CleanUp(driver.FindElement(By.Name("home")).GetAttribute("value").Trim());
+            string mobilePhone = CleanUp(driver.FindElement(By.Name("mobile")).GetAttribute("value").Trim());
+            string workPhone = CleanUp(driver.FindElement(By.Name("work")).GetAttribute("value").Trim());
 
             string email = driver.FindElement(By.Name("email")).GetAttribute("value");
             string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
@@ -230,7 +235,7 @@ namespace WebAddressbookTests
 
             manager.Navigator.OpenHomePage();
             InitContactModification(0);
-          string fullname = driver.FindElement(By.Name("firstname")).GetAttribute("value") + " " + driver.FindElement(By.Name("middlename")).GetAttribute("value") + " " + driver.FindElement(By.Name("lastname")).GetAttribute("value");
+          string fullname = driver.FindElement(By.Name("firstname")).GetAttribute("value") + " " + driver.FindElement(By.Name("middlename")).GetAttribute("value") + " " + driver.FindElement(By.Name("lastname")).GetAttribute("value").Trim();
            string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value");
             string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
            string middleName = driver.FindElement(By.Name("middlename")).GetAttribute("value");
@@ -239,15 +244,50 @@ namespace WebAddressbookTests
             string title = driver.FindElement(By.Name("title")).GetAttribute("value");
           //string fullname = firstName + middleName + lastName; 
 
-            string address = driver.FindElement(By.Name("address")).GetAttribute("value") + "\r\n";
+            string address = driver.FindElement(By.Name("address")).GetAttribute("value");
+            if (!string.IsNullOrEmpty(address))
+            {
+                address = driver.FindElement(By.Name("address")).GetAttribute("value");
+            }
+            else address = "";
+            string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
+            if (!string.IsNullOrEmpty(homePhone))
+            {
+                homePhone = "H:" + CleanUp(driver.FindElement(By.Name("home")).GetAttribute("value"));
+            }
+            else homePhone = "".Trim();
+            string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
 
-            string homePhone = "H:" + CleanUp(driver.FindElement(By.Name("home")).GetAttribute("value"));
-            string mobilePhone = "M:" + CleanUp(driver.FindElement(By.Name("mobile")).GetAttribute("value"));
-            string workPhone = "W:" + CleanUp(driver.FindElement(By.Name("work")).GetAttribute("value")) + "\r\n";
+            if (!string.IsNullOrEmpty(mobilePhone))
+            {
+                mobilePhone = "M:" + CleanUp(driver.FindElement(By.Name("mobile")).GetAttribute("value"));
+            }
+            else mobilePhone = "".Trim();
+            string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
+            if (!string.IsNullOrEmpty(workPhone))
+            {
+                workPhone = "W:" + CleanUp(driver.FindElement(By.Name("mobile")).GetAttribute("value"));
+            }
+            else workPhone = "".Trim();
 
             string email = driver.FindElement(By.Name("email")).GetAttribute("value");
+            if (!string.IsNullOrEmpty(email))
+            {
+                email = driver.FindElement(By.Name("email")).GetAttribute("value");
+            }
+            else email = "".Trim();
             string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
+            if (!string.IsNullOrEmpty(email2))
+            {
+                email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
+            }
+            else email2 = "".Trim();
             string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
+            if (!string.IsNullOrEmpty(email3))
+            {
+                email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
+            }
+            else email3 = "".Trim();
 
 
 
