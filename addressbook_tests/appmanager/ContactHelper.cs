@@ -172,7 +172,7 @@ namespace WebAddressbookTests
 
             return new ContactData(firstName, lastName)
             {
-                AllInfo = CleanUp(allInfo).Trim()
+                AllInfo = CleanUp(allInfo) + "\r\n"
             };
 
         }
@@ -237,7 +237,7 @@ namespace WebAddressbookTests
             InitContactModification(0);
           string fullname = driver.FindElement(By.Name("firstname")).GetAttribute("value") + " " + driver.FindElement(By.Name("middlename")).GetAttribute("value") + " " + driver.FindElement(By.Name("lastname")).GetAttribute("value").Trim();
            string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value");
-            string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
+            string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value") + "\r\n";
            string middleName = driver.FindElement(By.Name("middlename")).GetAttribute("value");
             string nickname = driver.FindElement(By.Name("nickname")).GetAttribute("value");
             string company = driver.FindElement(By.Name("company")).GetAttribute("value");
@@ -253,20 +253,20 @@ namespace WebAddressbookTests
             string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
             if (!string.IsNullOrEmpty(homePhone))
             {
-                homePhone = "H:" + CleanUp(driver.FindElement(By.Name("home")).GetAttribute("value"));
+                homePhone = "H:" + CleanUp(driver.FindElement(By.Name("home")).GetAttribute("value").Trim());
             }
             else homePhone = "".Trim();
             string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
 
             if (!string.IsNullOrEmpty(mobilePhone))
             {
-                mobilePhone = "M:" + CleanUp(driver.FindElement(By.Name("mobile")).GetAttribute("value"));
+                mobilePhone = "M:" + CleanUp(driver.FindElement(By.Name("mobile")).GetAttribute("value").Trim());
             }
             else mobilePhone = "".Trim();
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
             if (!string.IsNullOrEmpty(workPhone))
             {
-                workPhone = "W:" + CleanUp(driver.FindElement(By.Name("mobile")).GetAttribute("value"));
+                workPhone = "W:" + CleanUp(driver.FindElement(By.Name("work")).GetAttribute("value").Trim());
             }
             else workPhone = "".Trim();
 
