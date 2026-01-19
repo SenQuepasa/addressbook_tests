@@ -3,18 +3,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace WebAddressbookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
+        [XmlIgnore]
         private string allPhones;
+        [XmlIgnore]
         private string allEmails;
+        [XmlIgnore]
         private string allInfo;
-
-
 
         public ContactData(string firstname, string lastname, string middlename)
         {
@@ -24,12 +26,18 @@ namespace WebAddressbookTests
             Middlename = middlename;
 
         }
+        public ContactData(string firstname)
+        {
+            Firstname = firstname;
+        }
         public ContactData(string firstname, string lastname)
         {
             Firstname = firstname;
             Lastname = lastname;
         }
-
+        public ContactData()
+        {
+        }
 
         public ContactData(string firstname, string middlename, string lastname, string nickname, string title, string company, string address, string home, string mobile, string work, string email, string email2, string email3, string homepage, string bday, string bmonth, string byear, string aday, string amonth, string ayear)
         {
@@ -111,7 +119,8 @@ namespace WebAddressbookTests
         public string MobilePhone { get; set; }
         public string WorkPhone { get; set; }
         public string FullName { get; set; }
-        
+
+        [XmlIgnore]
         public string AllInfo
         {
             get
@@ -131,7 +140,7 @@ namespace WebAddressbookTests
                 allInfo = value;
             }
         }
-
+        [XmlIgnore]
         public string AllPhones 
         { 
             get {
@@ -149,6 +158,7 @@ namespace WebAddressbookTests
                 allPhones = value;
             } 
         }
+        [XmlIgnore]
         public string AllEmails
         {
             get
