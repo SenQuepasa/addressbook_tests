@@ -169,7 +169,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return CleanUp(Email) + CleanUp(Email2) + CleanUp(Email3).Trim();
+                    return CleanUp(Email) + CleanUp(Email2) + CleanUp(Email3);
                 }
             }
             set
