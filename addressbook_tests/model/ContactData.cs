@@ -125,14 +125,45 @@ namespace WebAddressbookTests
         {
             get
             {
-                if (allInfo != null)
+                if (!string.IsNullOrEmpty(allInfo))
                 {
                     return allInfo;
                 }
                 else
                 {
-                    return Firstname + " " + Middlename + Lastname + CleanUp(Nickname) + CleanUp(Title) + CleanUp(Company) + CleanUp(Address) + CleanUpPhone(HomePhone) + CleanUpPhone(MobilePhone) + CleanUpPhone(WorkPhone) + CleanUp(Email) + CleanUp(Email2) + CleanUp(Email3) + CleanUp(Homepage)
-                    + CleanUp(Bday) + CleanUp(Bmonth) + CleanUp(Byear) + CleanUp(Ayear) + CleanUp(Amonth) + CleanUp(Ayear);
+                    var parts = new List<string>();
+
+                    if (!string.IsNullOrEmpty(Firstname)) parts.Add(Firstname + " ");
+                    if (!string.IsNullOrEmpty(Middlename)) parts.Add(Middlename + " ");
+                    if (!string.IsNullOrEmpty(Lastname)) parts.Add(Lastname + "\r\n");
+
+                    if (!string.IsNullOrEmpty(Nickname)) parts.Add(CleanUp(Nickname));
+                    if (!string.IsNullOrEmpty(Title)) parts.Add(CleanUp(Title));
+                    if (!string.IsNullOrEmpty(Company)) parts.Add(CleanUp(Company));
+                    if (!string.IsNullOrEmpty(Address)) parts.Add(CleanUp(Address) + "\r\n");
+
+                    if (!string.IsNullOrEmpty(HomePhone))
+                        parts.Add("H: " + CleanUp(HomePhone));
+                    if (!string.IsNullOrEmpty(MobilePhone))
+                        parts.Add("M: " + CleanUp(MobilePhone));
+                    if (!string.IsNullOrEmpty(WorkPhone))
+                        parts.Add("W: " + CleanUp(WorkPhone) + "\r\n");
+
+                    if (!string.IsNullOrEmpty(Email)) parts.Add(CleanUp(Email));
+                    if (!string.IsNullOrEmpty(Email2)) parts.Add(CleanUp(Email2));
+                    if (!string.IsNullOrEmpty(Email3)) parts.Add(CleanUp(Email3));
+
+                    if (!string.IsNullOrEmpty(Homepage)) parts.Add(CleanUp(Homepage));
+
+                    if (!string.IsNullOrEmpty(Bday)) parts.Add(CleanUp(Bday));
+                    if (!string.IsNullOrEmpty(Bmonth)) parts.Add(CleanUp(Bmonth));
+                    if (!string.IsNullOrEmpty(Byear)) parts.Add(CleanUp(Byear));
+
+                    if (!string.IsNullOrEmpty(Aday)) parts.Add(CleanUp(Aday));
+                    if (!string.IsNullOrEmpty(Amonth)) parts.Add(CleanUp(Amonth));
+                    if (!string.IsNullOrEmpty(Ayear)) parts.Add(CleanUp(Ayear));
+
+                    return string.Join("", parts);
                 }
             }
             set
