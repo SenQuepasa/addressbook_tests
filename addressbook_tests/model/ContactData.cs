@@ -131,39 +131,61 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    var parts = new List<string>();
+                    var resultParts = new List<string>();
 
-                    if (!string.IsNullOrEmpty(Firstname)) parts.Add(Firstname + " ");
-                    if (!string.IsNullOrEmpty(Middlename)) parts.Add(Middlename + " ");
-                    if (!string.IsNullOrEmpty(Lastname)) parts.Add(Lastname + "\r\n");
+                    var fioParts = new List<string>();
+                    if (!string.IsNullOrEmpty(Firstname)) fioParts.Add(Firstname);
+                    if (!string.IsNullOrEmpty(Middlename)) fioParts.Add(Middlename);
+                    if (!string.IsNullOrEmpty(Lastname)) fioParts.Add(Lastname);
+                    if (fioParts.Count > 0)
+                        resultParts.Add(string.Join(" ", fioParts));
+                        resultParts.Add("");
 
-                    if (!string.IsNullOrEmpty(Nickname)) parts.Add(CleanUp(Nickname));
-                    if (!string.IsNullOrEmpty(Title)) parts.Add(CleanUp(Title));
-                    if (!string.IsNullOrEmpty(Company)) parts.Add(CleanUp(Company));
-                    if (!string.IsNullOrEmpty(Address)) parts.Add(CleanUp(Address) + "\r\n");
+                    var part1 = new List<string>();
+                    if (!string.IsNullOrEmpty(Nickname)) part1.Add(CleanUp(Nickname));
+                    if (!string.IsNullOrEmpty(Title)) part1.Add(CleanUp(Title));
+                    if (!string.IsNullOrEmpty(Company)) part1.Add(CleanUp(Company));
+                    if (!string.IsNullOrEmpty(Address)) part1.Add(CleanUp(Address));
+                    if (part1.Count > 0)
+                        resultParts.Add(string.Join("\r\n", part1));
 
+                    var phones = new List<string>();
                     if (!string.IsNullOrEmpty(HomePhone))
-                        parts.Add("H: " + CleanUp(HomePhone));
+                        phones.Add("H: " + CleanUpPhone(HomePhone));
                     if (!string.IsNullOrEmpty(MobilePhone))
-                        parts.Add("M: " + CleanUp(MobilePhone));
+                        phones.Add("M: " + CleanUpPhone(MobilePhone));
                     if (!string.IsNullOrEmpty(WorkPhone))
-                        parts.Add("W: " + CleanUp(WorkPhone) + "\r\n");
+                        phones.Add("W: " + CleanUpPhone(WorkPhone));
+                    if (phones.Count > 0)
+                        resultParts.Add(string.Join("\r\n", phones));
+                        resultParts.Add("");
 
-                    if (!string.IsNullOrEmpty(Email)) parts.Add(CleanUp(Email));
-                    if (!string.IsNullOrEmpty(Email2)) parts.Add(CleanUp(Email2));
-                    if (!string.IsNullOrEmpty(Email3)) parts.Add(CleanUp(Email3));
+                    var emails = new List<string>();
+                    if (!string.IsNullOrEmpty(Email)) emails.Add(CleanUp(Email));
+                    if (!string.IsNullOrEmpty(Email2)) emails.Add(CleanUp(Email2));
+                    if (!string.IsNullOrEmpty(Email3)) emails.Add(CleanUp(Email3));
+                    if (emails.Count > 0)
+                        resultParts.Add(string.Join("\r\n", emails));
+                        resultParts.Add("");
 
-                    if (!string.IsNullOrEmpty(Homepage)) parts.Add(CleanUp(Homepage));
+                    var part2 = new List<string>();
+                    if (!string.IsNullOrEmpty(Homepage)) part2.Add(CleanUp(Homepage));
+                    if (!string.IsNullOrEmpty(Bday) || !string.IsNullOrEmpty(Bmonth) || !string.IsNullOrEmpty(Byear))
+                    {
+                        var birthDate = string.Join(".", new[] { Bday, Bmonth, Byear }.Where(s => !string.IsNullOrEmpty(s)));
+                        part2.Add(birthDate);
+                    }
 
-                    if (!string.IsNullOrEmpty(Bday)) parts.Add(CleanUp(Bday));
-                    if (!string.IsNullOrEmpty(Bmonth)) parts.Add(CleanUp(Bmonth));
-                    if (!string.IsNullOrEmpty(Byear)) parts.Add(CleanUp(Byear));
+                    if (!string.IsNullOrEmpty(Aday) || !string.IsNullOrEmpty(Amonth) || !string.IsNullOrEmpty(Ayear))
+                    {
+                        var anniversaryDate = string.Join(".", new[] { Aday, Amonth, Ayear }.Where(s => !string.IsNullOrEmpty(s)));
+                        part2.Add(anniversaryDate);
+                    }
 
-                    if (!string.IsNullOrEmpty(Aday)) parts.Add(CleanUp(Aday));
-                    if (!string.IsNullOrEmpty(Amonth)) parts.Add(CleanUp(Amonth));
-                    if (!string.IsNullOrEmpty(Ayear)) parts.Add(CleanUp(Ayear));
+                    if (part2.Count > 0)
+                        resultParts.Add(string.Join("\r\n", part2));
 
-                    return string.Join("", parts);
+                    return string.Join("\r\n", resultParts);
                 }
             }
             set
@@ -171,6 +193,7 @@ namespace WebAddressbookTests
                 allInfo = value;
             }
         }
+
         [XmlIgnore]
         public string AllPhones 
         { 
@@ -216,7 +239,7 @@ namespace WebAddressbookTests
             {
                 return "";
             }
-           return Regex.Replace(phone, "[()-]","") + "\r\n";
+           return Regex.Replace(phone, "[()-]","");
 
         }
 
