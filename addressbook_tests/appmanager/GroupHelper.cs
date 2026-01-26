@@ -59,6 +59,15 @@ namespace WebAddressbookTests
             manager.Navigator.GoToGroupPage();
             return this;
         }
+        public GroupHelper Remove(GroupData group)
+        {
+            manager.Navigator.GoToGroupPage();
+
+            SelectGroup(group.Id);
+            RemoveGroup();
+            manager.Navigator.GoToGroupPage();
+            return this;
+        }
         public GroupHelper InitNewGroupCreation()
         {
             driver.FindElement(By.Name("new")).Click();
@@ -88,11 +97,17 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("delete")).Click();
             groupCache = null;
             return this;
-
         }
+       
         public GroupHelper SelectGroup(int index)
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/span[" + (index+1) + "]/input")).Click();
+            return this;
+
+        }
+        public GroupHelper SelectGroup(String id)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='"+id+"'])")).Click();
             return this;
 
         }
@@ -135,5 +150,7 @@ namespace WebAddressbookTests
             manager.Navigator.GoToGroupPage();
             return driver.FindElements(By.CssSelector("span.group")).Count;
         }
+
+        
     }
 }
