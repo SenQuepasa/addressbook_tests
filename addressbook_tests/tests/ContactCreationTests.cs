@@ -44,7 +44,7 @@ namespace WebAddressbookTests
         [Test, TestCaseSource("ContactDataFromXmlFile")]
         public void ContactCreationTests()
         {
-            List<ContactData> oldStrings = app.Contacts.GetContactStrings();
+            List<ContactData> oldStrings = ContactData.GetAll();
             app.Contacts.AddContact();
             ContactData contact = new ContactData("Ivan", "Ivanovich", "Ivanov", "", "", "", "", "", "", "", "", "", "", "", "","","","","","");
             app.Contacts
@@ -52,7 +52,7 @@ namespace WebAddressbookTests
                 .SubmitContactCreation();
             app.Navigator.ReturnToHomePage();
 
-            List<ContactData> newStrings = app.Contacts.GetContactStrings();
+            List<ContactData> newStrings = ContactData.GetAll();
             oldStrings.Add(contact);
             oldStrings.Sort();
             newStrings.Sort();
