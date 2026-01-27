@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -107,11 +108,9 @@ namespace WebAddressbookTests
             contactCache = null;
             return this;
         }
-        public ContactHelper SelectContact(string contactId)
+        public void SelectContact(string contactId)
         {
             driver.FindElement(By.Id(contactId)).Click();
-            return this;
-
         }
         public ContactHelper RemoveContact()
         {
@@ -315,7 +314,16 @@ namespace WebAddressbookTests
 
             };
         }
-
+        public void RemoveContactFromGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.ReturnToHomePage();
+            ClearGroupFilter();
+            SelectGroupInFilter(3);
+            SelectContact(contact.Id);
+            RemoveFromGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
         public void AddContactToGroup(ContactData contact, GroupData group)
         {
             manager.Navigator.ReturnToHomePage();
@@ -332,6 +340,11 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("add")).Click();
         }
 
+        public void RemoveFromGroup()
+        {
+            driver.FindElement(By.Name("remove")).Click();
+        }
+
         public void SelectGroupToAdd(string name)
         {
             new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
@@ -341,5 +354,14 @@ namespace WebAddressbookTests
         {
             new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");    
         }
+
+        public void SelectGroupInFilter(int index)
+        {
+            var dropdown = driver.FindElement(By.Name("group"));
+            var select = new SelectElement(dropdown);
+            select.SelectByIndex(index); 
+        }
+
+
     }
     }
