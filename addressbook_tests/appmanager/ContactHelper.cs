@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Microsoft.Office.Interop.Excel;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -97,18 +98,18 @@ namespace WebAddressbookTests
             return this;
 
         }
-        public ContactHelper Remove(int v)
+        public ContactHelper Remove(string contactId)
         {
             manager.Navigator.ReturnToHomePage();
-            SelectContact(v);
+            SelectContact(contactId);
             RemoveContact();
             manager.Navigator.ReturnToHomePage();
             contactCache = null;
             return this;
         }
-        public ContactHelper SelectContact(int index)
+        public ContactHelper SelectContact(string contactId)
         {
-            driver.FindElement(By.XPath("//input[@type='checkbox']")).Click();
+            driver.FindElement(By.Id(contactId)).Click();
             return this;
 
         }
@@ -313,6 +314,32 @@ namespace WebAddressbookTests
                 Email3 = email3
 
             };
+        }
+
+        public void AddContactToGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.ReturnToHomePage();
+            ClearGroupFilter();
+            SelectContact(contact.Id);
+            SelectGroupToAdd(group.Name);
+            CommitAddingContactToGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        public void CommitAddingContactToGroup()
+        {
+            driver.FindElement(By.Name("add")).Click();
+        }
+
+        public void SelectGroupToAdd(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
+        }
+
+        public void ClearGroupFilter()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");    
         }
     }
     }

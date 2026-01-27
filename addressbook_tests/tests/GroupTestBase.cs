@@ -10,6 +10,8 @@ namespace WebAddressbookTests
 {
     public class GroupTestBase : AuthTestBase
     {
+        public bool PERFORM_LONG_UI_CHECKS { get; private set; }
+
         [TearDown]
         public void compareGroupsUi_DB()
         {

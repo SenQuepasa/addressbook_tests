@@ -6,9 +6,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using LinqToDB.Mapping;
 
 namespace WebAddressbookTests
 {
+    [Table(Name = "addressbook")]
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         [XmlIgnore]
@@ -108,9 +110,17 @@ namespace WebAddressbookTests
             }
             return Firstname.CompareTo(other.Firstname);
         }
+        [Column(Name = "firstname")]
         public string Firstname { get; set; }
+
         public string Middlename { get; set; }
+        
+        [Column(Name = "lastname")]
         public string Lastname { get; set; }
+        
+        [Column(Name = "id"), PrimaryKey]
+        public string Id { get; set; }
+        
         public string Nickname { get; set; }
         public string Title { get; set; }
         public string Company { get; set; }
@@ -259,7 +269,16 @@ namespace WebAddressbookTests
         public string Aday { get; set; }
         public string Amonth { get; set; }
         public string Ayear { get; set; }
-        public string Id { get; set; }
-      
+
+        [Column(Name = "deprecated")]
+        public string Deprecated { get; set; }
+
+        public static List<ContactData> GetAll()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from c in db.Contacts.Where(x => x.Deprecated == "0000-00-00 00:00:00") select c).ToList();
+            }
+        }
     }
 }

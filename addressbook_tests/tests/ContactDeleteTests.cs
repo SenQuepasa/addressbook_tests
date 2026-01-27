@@ -14,6 +14,8 @@ namespace WebAddressbookTests.tests
     [TestFixture]
     public class ContactDeleteTests : AuthTestBase
     {
+        private string contactId;
+
         [Test]
         public void ContactDeleteTest()
         {
@@ -23,7 +25,7 @@ namespace WebAddressbookTests.tests
                 ContactData newData = new ContactData("Семен", "Семенович", "Семенов", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
                 app.Contacts.Create(newData);
             }
-                app.Contacts.Remove(0);
+                app.Contacts.Remove(contactId);
             List<ContactData> newStrings = app.Contacts.GetContactStrings();
             oldStrings.RemoveAt(0);
             oldStrings.Sort();
