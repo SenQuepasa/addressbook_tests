@@ -24,22 +24,27 @@ namespace WebAddressbookTests {
                 group.Footer = "ничего не было";
 
                 app.Groups.Create(group);
-
-                GroupData group1 = new GroupData("стало новое значение");
-                group.Header = "стало новое значение";
-                group.Footer = "стало новое значение";
             }
+
             List<GroupData> oldGroups = GroupData.GetAll();
             GroupData oldData = oldGroups[0];
+            GroupData groupToModify = oldGroups[0];
             GroupData newData = new GroupData("345");
             newData.Header = "EEE";
             newData.Footer = "FFF";
-            app.Groups.Modify(0, newData);
+            app.Groups.Modify(groupToModify, newData);
 
             Assert.AreEqual(oldGroups.Count, app.Groups.GetGroupCount());
 
             List<GroupData> newGroups = GroupData.GetAll();
-            oldGroups[0].Name = newData.Name;
+            GroupData modifiedGroup = oldGroups.Find(g => g.Id == groupToModify.Id);
+            if (modifiedGroup == null)
+            {
+                Assert.Fail($"Группа с Id={groupToModify.Id} не найдена в старом списке.");
+            }
+            modifiedGroup.Name = newData.Name;
+            modifiedGroup.Header = newData.Header;
+            modifiedGroup.Footer = newData.Footer;
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);

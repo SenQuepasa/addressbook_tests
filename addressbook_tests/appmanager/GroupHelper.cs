@@ -23,10 +23,14 @@ namespace WebAddressbookTests
             SubmitGroupCreation();
             return this;
         }
-        public GroupHelper Modify(int v, GroupData newData)
+        public GroupHelper Modify(GroupData oldData, GroupData newData)
         {
             manager.Navigator.GoToGroupPage();
-            SelectGroup(v);
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            IWebElement checkbox = wait.Until(d =>
+                d.FindElement(By.CssSelector($"input[name='selected[]'][value='{oldData.Id}']"))
+            );
+            checkbox.Click();
             InitGroupModification();
             FillGroupForm(newData);
             SubmitGroupModification();

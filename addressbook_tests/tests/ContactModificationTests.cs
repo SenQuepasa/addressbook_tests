@@ -25,11 +25,15 @@ namespace WebAddressbookTests.tests
                 app.Contacts.Create(newData1);
             }
             List<ContactData> oldStrings = ContactData.GetAll();
+            ContactData contactToModify = oldStrings[0];
             ContactData newData2 = new ContactData("Игорь", "Игоревич", "Игорев", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
-            app.Contacts.Modify(0, newData2);
+            newData2.Id = contactToModify.Id;
+            app.Contacts.Modify(contactToModify, newData2);
             List<ContactData> newStrings = ContactData.GetAll();
-            oldStrings[0].Firstname = newData2.Firstname;
-            oldStrings[0].Lastname = newData2.Lastname;
+            ContactData modifiedOld = oldStrings.Find(c => c.Id == contactToModify.Id);
+            modifiedOld.Firstname = newData2.Firstname;
+            modifiedOld.Lastname = newData2.Lastname;
+            modifiedOld.Middlename = newData2.Middlename;
             oldStrings.Sort();
             newStrings.Sort();
             Assert.AreEqual(oldStrings, newStrings);

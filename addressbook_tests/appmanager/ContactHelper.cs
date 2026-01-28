@@ -18,7 +18,7 @@ namespace WebAddressbookTests
         public ContactHelper(ApplicationManager manager) : base(manager)
         {
         }
-        public ContactHelper Modify(int v, ContactData newData)
+        public ContactHelper Modify(ContactData oldData, ContactData newData)
         {
             manager.Navigator.ReturnToHomePage();
             InitContactModification(0);
