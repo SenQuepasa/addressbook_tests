@@ -318,7 +318,7 @@ namespace WebAddressbookTests
         {
             manager.Navigator.ReturnToHomePage();
             ClearGroupFilter();
-            SelectGroupInFilter(3);
+            SelectGroupInFilter(group.Name);
             SelectContact(contact.Id);
             RemoveFromGroup();
             new WebDriverWait(driver, TimeSpan.FromSeconds(10))
@@ -328,8 +328,14 @@ namespace WebAddressbookTests
         {
             manager.Navigator.ReturnToHomePage();
             ClearGroupFilter();
-            SelectContact(contact.Id);
+
+            IWebElement contactCheckbox = driver.FindElement(By.CssSelector($"input[name='selected[]'][value='{contact.Id}']"));
+            contactCheckbox.Click();
+
+            // Выбираем группу из выпадающего списка
             SelectGroupToAdd(group.Name);
+
+            // Подтверждаем добавление
             CommitAddingContactToGroup();
             new WebDriverWait(driver, TimeSpan.FromSeconds(10))
                 .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
@@ -355,12 +361,14 @@ namespace WebAddressbookTests
             new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");    
         }
 
-        public void SelectGroupInFilter(int index)
+        public void SelectGroupInFilter(string groupName)
         {
             var dropdown = driver.FindElement(By.Name("group"));
             var select = new SelectElement(dropdown);
-            select.SelectByIndex(index); 
+            select.SelectByText(groupName);
         }
+
+
 
 
     }
