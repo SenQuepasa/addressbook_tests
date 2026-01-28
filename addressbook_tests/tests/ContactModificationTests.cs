@@ -19,12 +19,12 @@ namespace WebAddressbookTests.tests
         public void ContactModificationTest()
         {
             app.Navigator.ReturnToHomePage();
-            List<ContactData> oldStrings = ContactData.GetAll();
             if (app.Contacts.ThereisNoContacts())
             {
                 ContactData newData1 = new ContactData("Семен", "Семенович", "Семенов", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
                 app.Contacts.Create(newData1);
             }
+            List<ContactData> oldStrings = ContactData.GetAll();
             ContactData newData2 = new ContactData("Игорь", "Игоревич", "Игорев", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
             app.Contacts.Modify(0, newData2);
             List<ContactData> newStrings = ContactData.GetAll();

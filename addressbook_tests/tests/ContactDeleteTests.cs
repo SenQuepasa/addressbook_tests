@@ -19,14 +19,16 @@ namespace WebAddressbookTests.tests
         [Test]
         public void ContactDeleteTest()
         {
-            List<ContactData> oldStrings = ContactData.GetAll();
-            ContactData contactId = oldStrings[0];
             if (app.Contacts.ThereisNoContacts())
             {
                 ContactData newData = new ContactData("Семен", "Семенович", "Семенов", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
                 app.Contacts.Create(newData);
             }
-                app.Contacts.Remove(contactId.Id);
+            List<ContactData> oldStrings = ContactData.GetAll();
+            ContactData contactId = oldStrings[0];
+
+            app.Contacts.Remove(contactId.Id);
+
             List<ContactData> newStrings = ContactData.GetAll();
             oldStrings.RemoveAt(0);
             oldStrings.Sort();

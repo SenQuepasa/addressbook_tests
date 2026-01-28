@@ -14,9 +14,6 @@ namespace WebAddressbookTests
         public void GroupDeleteTest()
         {
             app.Navigator.GoToGroupPage();
-            List<GroupData> oldGroups = GroupData.GetAll();
-            GroupData toBeRemoved = oldGroups[0];
-
             if (app.Groups.ThereisNoGroups())
             {
                 GroupData group = new GroupData("ничего не было");
@@ -24,8 +21,9 @@ namespace WebAddressbookTests
                 group.Footer = "ничего не было";
 
                 app.Groups.Create(group);
-
             }
+            List<GroupData> oldGroups = GroupData.GetAll();
+            GroupData toBeRemoved = oldGroups[0];
             app.Groups.Remove(toBeRemoved);
             Assert.AreEqual(oldGroups.Count - 1, app.Groups.GetGroupCount());
 

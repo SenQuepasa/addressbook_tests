@@ -17,10 +17,6 @@ namespace WebAddressbookTests {
         public void GroupModificationTest()
     {
             app.Navigator.GoToGroupPage();
-            List<GroupData> oldGroups = GroupData.GetAll();
-            GroupData oldData = oldGroups[0];
-
-
             if (app.Groups.ThereisNoGroups())
             {
                 GroupData group = new GroupData("ничего не было");
@@ -33,7 +29,8 @@ namespace WebAddressbookTests {
                 group.Header = "стало новое значение";
                 group.Footer = "стало новое значение";
             }
-            
+            List<GroupData> oldGroups = GroupData.GetAll();
+            GroupData oldData = oldGroups[0];
             GroupData newData = new GroupData("345");
             newData.Header = "EEE";
             newData.Footer = "FFF";
