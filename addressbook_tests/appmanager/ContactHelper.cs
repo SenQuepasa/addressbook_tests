@@ -21,10 +21,25 @@ namespace WebAddressbookTests
         public ContactHelper Modify(ContactData oldData, ContactData newData)
         {
             manager.Navigator.ReturnToHomePage();
-            InitContactModification(0);
+
+            // Находим чекбокс с нужным Id и кликаем
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            IWebElement checkbox = wait.Until(d =>
+                d.FindElement(By.CssSelector($"input[name='selected[]'][value='{oldData.Id}']"))
+            );
+            checkbox.Click();
+
+            // Нажимаем "Edit"
+            InitContactModification(oldData.Id);
+
+            // Заполняем форму
             FillContactForm(newData);
+
+            // Нажимаем "Update"
             SubmitContactModification();
+
             manager.Navigator.ReturnToHomePage();
+
             return this;
         }
         public ContactHelper Create(ContactData newData)
@@ -42,11 +57,18 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper InitContactModification(int index)
+        public ContactHelper InitContactModification(string id)
         {
-            driver.FindElements(By.Name("entry"))[index]
-            .FindElements(By.TagName("td"))[7]
-            .FindElement(By.TagName("a")).Click();
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+
+            // Находим строку, содержащую чекбокс с нужным Id
+            IWebElement row = wait.Until(d =>
+                d.FindElement(By.XPath($"//tr[.//input[@name='selected[]' and @value='{id}']]"))
+            );
+            // Находим в этой строке ссылку "Edit" (в 8-й ячейке или по тексту)
+            IWebElement editLink = row.FindElement(By.XPath(".//td[8]/a")); // 8-я ячейка — "Edit"
+
+            editLink.Click();
             return this;
         }
 
@@ -188,10 +210,10 @@ namespace WebAddressbookTests
         }
 
 
-        public ContactData GetContactInformationFromEditForm(int index)
+        public ContactData GetContactInformationFromEditForm(ContactData oldData)
         {
             manager.Navigator.OpenHomePage();
-            InitContactModification(0);
+            InitContactModification(oldData.Id);
             string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value");
             string middlename = driver.FindElement(By.Name("middlename")).GetAttribute("value");
 
@@ -230,11 +252,11 @@ namespace WebAddressbookTests
              };
         }
 
-        public ContactData GetContactInformationFromEditFormEdition(int index)
+        public ContactData GetContactInformationFromEditFormEdition(ContactData oldData)
         {
 
             manager.Navigator.OpenHomePage();
-            InitContactModification(0);
+            InitContactModification(oldData.Id);
           string fullname = driver.FindElement(By.Name("firstname")).GetAttribute("value") + " " + driver.FindElement(By.Name("middlename")).GetAttribute("value") + " " + driver.FindElement(By.Name("lastname")).GetAttribute("value");
            string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value");
             string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
