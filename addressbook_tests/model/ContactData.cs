@@ -86,10 +86,24 @@ namespace WebAddressbookTests
 
         }
 
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            if (this == obj) return true;
+            if (GetType() != obj.GetType()) return false;
+            ContactData other = (ContactData)obj;
+            return Id == other.Id;
+        }
+
         public override int GetHashCode()
         {
-            return Firstname.GetHashCode();
+            return Id?.GetHashCode() ?? 0;
         }
+
+        //public override int GetHashCode()
+        //{
+        //    return Firstname.GetHashCode();
+        //}
 
         public override string ToString()
         {

@@ -45,38 +45,43 @@ namespace WebAddressbookTests
             }
             else
             {
-                // Шаг 3: Если в группе нет контактов — создаём и добавляем
-                ContactData newContact = new ContactData($"auto_first_{DateTime.Now:HHmmss}", "auto_last");
-                app.Contacts.Create(newContact);
-                
-                // Добавляем в группу
-                app.Contacts.AddContactToGroup(newContact, targetGroup);
+                // 2. Если в группе нет контактов — ищем ЛЮБОЙ контакт, которого в ней нет
+                List<ContactData> contactsNotInGroup = contacts.Except(contactsInGroup).ToList();
 
-                // Обновляем список контактов в группе
-                contactsInGroup = targetGroup.GetContacts();
-
-                // Убеждаемся, что контакт добавился
-                if (contactsInGroup.Count == 0)
+                if (contactsNotInGroup.Count == 0)
                 {
-                    Assert.Fail("Не удалось добавить контакт в группу для теста удаления.");
+                    // Только если вообще нет свободных контактов — создаём новый
+                    ContactData newContact = new ContactData($"auto_{DateTime.Now:HHmmss}", "last");
+                    app.Contacts.Create(newContact);
+                    contactToRemove = newContact;
+                }
+                else
+                {
+                    // Берём существующий контакт, который не в группе
+                    contactToRemove = contactsNotInGroup.First();
                 }
 
-                contactToRemove = contactsInGroup.First();
+                // Добавляем его в группу
+                app.Contacts.AddContactToGroup(contactToRemove, targetGroup);
+
+                // Проверяем, что добавился
+                List<ContactData> updatedContactsInGroup = targetGroup.GetContacts();
+                if (!updatedContactsInGroup.Contains(contactToRemove))
+                {
+                    Assert.Fail("Не удалось добавить существующий контакт в группу.");
+                }
             }
 
-            // К этому моменту contactToRemove точно существует и входит в группу
+            // Сохраняем состояние до удаления
+            List<ContactData> oldList = targetGroup.GetContacts();
+            oldList.Remove(contactToRemove);
 
-            // Шаг 4: Сохраняем состояние ДО удаления
-            List<ContactData> oldList = new List<ContactData>(contactsInGroup);
-
-            // Удаляем контакт из группы
+            // Удаляем
             app.Contacts.RemoveContactFromGroup(contactToRemove, targetGroup);
 
-            // Шаг 5: Получаем состояние ПОСЛЕ удаления
+            // Проверяем состояние после
             List<ContactData> newList = targetGroup.GetContacts();
 
-            // Шаг 6: Проверяем результат
-            oldList.Remove(contactToRemove);
             oldList.Sort();
             newList.Sort();
 
