@@ -14,7 +14,6 @@ namespace WebAddressbookTests
         public void TestAddingContactToGroup()
         {
             List<GroupData> groups = GroupData.GetAll();
-            List<GroupData> oldList = GroupData.GetAll();
             List<ContactData> contacts = ContactData.GetAll();
 
             if (app.Groups.ThereisNoGroups())
@@ -34,6 +33,7 @@ namespace WebAddressbookTests
             GroupData targetGroup = null;
             ContactData targetContact = null;
 
+            // Ищем группу, в которой есть свободные контакты
             foreach (GroupData group in groups)
             {
                 List<ContactData> contactsInGroup = group.GetContacts();
@@ -47,37 +47,36 @@ namespace WebAddressbookTests
                 }
             }
 
+            // Если не нашли — создаём ЛИБО новый контакт, ЛИБО новую группу
             if (targetGroup == null || targetContact == null)
             {
-                GroupData newGroup = new GroupData($"test_group_{DateTime.Now:MMddHHmmss}");
-                app.Groups.Create(newGroup);
-                targetGroup = GroupData.GetAll().First(g => g.Name == newGroup.Name); 
-
-                ContactData newContact = new ContactData($"auto_first_{DateTime.Now:HHmmss}", "auto_last");
+                // Создаём НОВЫЙ КОНТАКТ и добавляем в СУЩЕСТВУЮЩУЮ группу
+                ContactData newContact = new ContactData($"auto_{DateTime.Now:HHmmss}", "last");
                 app.Contacts.Create(newContact);
                 targetContact = ContactData.GetAll().First(c => c.Firstname == newContact.Firstname);
+                targetGroup = groups[0]; // Берём первую группу
             }
 
+            // Проверяем: контакт ещё не в группе
             List<ContactData> contactsBefore = targetGroup.GetContacts();
             if (contactsBefore.Contains(targetContact))
             {
                 Assert.Fail("Контакт уже состоит в группе");
             }
 
+            // Добавляем контакт
             app.Contacts.AddContactToGroup(targetContact, targetGroup);
 
+            // Проверяем: контакт добавлен
             List<ContactData> contactsAfter = targetGroup.GetContacts();
+            Assert.IsTrue(contactsAfter.Contains(targetContact), "Контакт не был добавлен в группу");
 
-            Assert.IsTrue(
-                contactsAfter.Contains(targetContact),
-                $"Контакт не был добавлен в группу");
-        
-
+            // Проверяем: список групп НЕ изменился
             List<GroupData> newList = GroupData.GetAll();
-
-              newList.Sort();
-              oldList.Sort();
-              Assert.AreEqual(oldList, newList);
+            newList.Sort();
+            List<GroupData> oldList = GroupData.GetAll(); // Обновляем, если были изменения
+            oldList.Sort();
+            Assert.AreEqual(oldList, newList, "Список групп изменился, хотя не должен был");
         }
     }
 }
